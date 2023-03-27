@@ -47,21 +47,13 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.outlined.AlternateEmail
 import androidx.compose.material.icons.outlined.Duo
 import androidx.compose.material.icons.outlined.InsertPhoto
 import androidx.compose.material.icons.outlined.Mood
 import androidx.compose.material.icons.outlined.Place
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -115,7 +107,7 @@ fun UserInputPreview() {
     UserInput(onMessageSent = {})
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun UserInput(
     onMessageSent: (String) -> Unit,
@@ -153,24 +145,6 @@ fun UserInput(
                     textFieldFocusState = focused
                 },
                 focusState = textFieldFocusState
-            )
-            UserInputSelector(
-                onSelectorChange = { currentInputSelector = it },
-                sendMessageEnabled = textState.text.isNotBlank(),
-                onMessageSent = {
-                    onMessageSent(textState.text)
-                    // Reset text field and close keyboard
-                    textState = TextFieldValue()
-                    // Move scroll to bottom
-                    resetScroll()
-                    dismissKeyboard()
-                },
-                currentInputSelector = currentInputSelector
-            )
-            SelectorExpanded(
-                onCloseRequested = dismissKeyboard,
-                onTextAdded = { textState = textState.addText(it) },
-                currentSelector = currentInputSelector
             )
         }
     }
@@ -214,7 +188,9 @@ private fun SelectorExpanded(
             InputSelector.PICTURE -> FunctionalityNotAvailablePanel()
             InputSelector.MAP -> FunctionalityNotAvailablePanel()
             InputSelector.PHONE -> FunctionalityNotAvailablePanel()
-            else -> { throw NotImplementedError() }
+            else -> {
+                throw NotImplementedError()
+            }
         }
     }
 }
@@ -355,7 +331,9 @@ private fun InputSelectorButton(
         Icon(
             icon,
             tint = tint,
-            modifier = Modifier.padding(8.dp).size(56.dp),
+            modifier = Modifier
+                .padding(8.dp)
+                .size(56.dp),
             contentDescription = description
         )
     }
@@ -398,13 +376,14 @@ private fun UserInputText(
                     .align(Alignment.Bottom)
             ) {
                 var lastFocusState by remember { mutableStateOf(false) }
+
                 BasicTextField(
                     value = textFieldValue,
                     onValueChange = { onTextChanged(it) },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 32.dp)
                         .align(Alignment.CenterStart)
+                        .padding(start = 32.dp)
                         .onFocusChanged { state ->
                             if (lastFocusState != state.isFocused) {
                                 onTextFieldFocused(state.isFocused)
@@ -419,6 +398,10 @@ private fun UserInputText(
                     cursorBrush = SolidColor(LocalContentColor.current),
                     textStyle = LocalTextStyle.current.copy(color = LocalContentColor.current)
                 )
+
+                IconButton(onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.CenterEnd).padding(end = 16.dp)) {
+                    Icon(Icons.Filled.Send, contentDescription = "Send Message")
+                }
 
                 val disableContentColor =
                     MaterialTheme.colorScheme.onSurfaceVariant
