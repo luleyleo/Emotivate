@@ -99,8 +99,8 @@ def arousalInference(audioPath, featuresPath, storagePath):
 
 
 def API(audioPath):
-
-	storagePath = 'arousal_recognition\\Models_Arousal'
+	from pathlib import Path
+	storagePath = Path('arousal_recognition','Models_Arousal').__str__()
 
 	featuresPath = 'FeaturesFolder'
 	if not os.path.exists(featuresPath): os.mkdir(featuresPath)

@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5b8cabf-226d-4a3e-8d10-68b9da3a3018" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/plots/v_a_plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotting/plot.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/preprocessing/preprocessing_sound_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/valence_recognition/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/emo_db/03a05Wb.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module_arousal.py" beforeDir="false" afterPath="$PROJECT_DIR$/module_arousal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module_sentiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/module_sentiment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_readme.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_readme.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +59,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis\data\emo_db" />
       <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis\valence_recognition" />
     </key>
   </component>
   <component name="RunManager">
@@ -96,7 +108,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/test_readme.py</url>
-          <line>19</line>
+          <line>14</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

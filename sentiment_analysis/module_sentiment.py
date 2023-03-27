@@ -37,8 +37,8 @@ def infer_sentiment(model, embeddings):
 
 
 def API(sentence):
-
-	storagePath = 'valence_recognition\\Models_Sentiment'
+	from pathlib import Path
+	storagePath = Path('valence_recognition','Models_Sentiment')
 
 	tokens = tokenizeSentence(sentence.lower().replace(',','').replace('.',''))
 
