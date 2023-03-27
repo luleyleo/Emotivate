@@ -13,5 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-./sentiment_analysis/data/datasets/emo_db/*
-./sentiment_analysis/data/plots/*
+
