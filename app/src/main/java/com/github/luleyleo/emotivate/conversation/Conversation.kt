@@ -198,7 +198,7 @@ fun ChannelNameBar(
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 // Channel name
                 Text(
-                    text = "I did it!",
+                    text = "Emotivate",
                     style = MaterialTheme.typography.titleMedium
                 )
             }
