@@ -18,6 +18,7 @@
 
 package com.github.luleyleo.emotivate.conversation
 
+import android.content.res.Resources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -58,6 +59,7 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
@@ -66,6 +68,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import com.github.luleyleo.emotivate.FunctionalityNotAvailablePopup
 import com.github.luleyleo.emotivate.R
 import com.github.luleyleo.emotivate.components.JetchatAppBar
@@ -75,6 +78,10 @@ import com.github.luleyleo.emotivate.state.ConversationViewModel
 import com.github.luleyleo.emotivate.state.Message
 import com.github.luleyleo.emotivate.theme.JetchatTheme
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+import java.io.FileWriter
+import java.io.InputStream
 
 /**
  * Entry point for a conversation screen.
@@ -116,16 +123,44 @@ fun ConversationContent(
             .exclude(WindowInsets.ime),
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
     ) { paddingValues ->
-        Column(Modifier.fillMaxSize().padding(paddingValues)) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(paddingValues)) {
             Messages(
                 messages = model.uiState.messages,
                 navigateToProfile = navigateToProfile,
                 modifier = Modifier.weight(1f),
                 scrollState = scrollState
             )
+
+            val resources = LocalContext.current.resources
+            val cacheDir = LocalContext.current.cacheDir
+
             UserInput(
                 onMessageSent = { content ->
-                    model.sendMessage(content)
+                        val sampleTranscript = resources.getString(R.string.sample_audio_transcript)
+                        val sampleAudio = resources.openRawResource(R.raw.sample_audio)
+
+                        fun copyStreamToFile(inputStream: InputStream, outputFile: File) {
+                            inputStream.use { input ->
+                                val outputStream = FileOutputStream(outputFile)
+                                outputStream.use { output ->
+                                    val buffer = ByteArray(4 * 1024) // buffer size
+                                    while (true) {
+                                        val byteCount = input.read(buffer)
+                                        if (byteCount < 0) break
+                                        output.write(buffer, 0, byteCount)
+                                    }
+                                    output.flush()
+                                }
+                            }
+                        }
+
+                        val cacheFile = File.createTempFile("cached_audio.wav", null, cacheDir)
+                        copyStreamToFile(sampleAudio, cacheFile)
+
+                        model.sendMessage(sampleTranscript, cacheFile)
                 },
                 resetScroll = {
                     scope.launch {
@@ -134,7 +169,9 @@ fun ConversationContent(
                 },
                 // let this element handle the padding so that the elevation is shown behind the
                 // navigation bar
-                modifier = Modifier.navigationBarsPadding().imePadding()
+                modifier = Modifier
+                    .navigationBarsPadding()
+                    .imePadding()
             )
         }
     }

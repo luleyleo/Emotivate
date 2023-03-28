@@ -10,5 +10,5 @@ import retrofit2.http.Part
 interface NeuralService {
     @Multipart
     @POST("api/audio")
-    suspend fun getAffectArousalDiagram(@Part("transcript") transcript: RequestBody, @Part("audio") audio: RequestBody): ResponseBody
+    suspend fun getAffectArousalDiagram(@Part("transcript") transcript: RequestBody, @Part audio: MultipartBody.Part): ResponseBody
 }

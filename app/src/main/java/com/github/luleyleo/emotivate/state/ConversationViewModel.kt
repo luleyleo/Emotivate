@@ -12,12 +12,12 @@ class ConversationViewModel(initialState: ConversationUiState = ConversationUiSt
 
     private var client = Client()
 
-    fun sendMessage(message: String) {
-        uiState.addMessage(Message("me", "now", message))
+    fun sendMessage(transcript: String, audio: File) {
+        uiState.addMessage(Message("me", "now", transcript))
 
         viewModelScope.launch {
             try {
-                val diagram = client.getAffectArousalDiagram(message, File(""))
+                val diagram = client.getAffectArousalDiagram(transcript, audio)
                 uiState.addMessage(Message("bot", "now", "Your emotions:", diagram))
             } catch (e: Exception) {
                 uiState.addMessage(Message("bot", "now", "Error:\n" + e.message))

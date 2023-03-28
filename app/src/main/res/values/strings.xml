@@ -16,6 +16,7 @@
 
 <resources>
     <string name="app_name">Emotivate</string>
+    <string name="sample_audio_transcript">Das will sie am Mittwoch abgeben.</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
