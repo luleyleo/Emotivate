@@ -19,8 +19,8 @@ def save_mfcc_features(audio_files, out_dir, frames_root):
             np.savez_compressed(output_file.as_posix(), {'mel_spectrum': mel_f})
 
 
-dataset_root = pathlib.Path('data/datasets/emo_db')
-preprocessed_root = pathlib.Path('data/preprocessed/emo_db')
+dataset_root = pathlib.Path('data/datasets/ASVP-ESD')
+preprocessed_root = pathlib.Path('data/preprocessed/ASVP-ESD')
 audio_root = pathlib.Path(dataset_root, 'wav')
 
 #  get a list of absolute paths for corresponding '.wav'-files
