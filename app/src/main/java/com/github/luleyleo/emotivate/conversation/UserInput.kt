@@ -132,6 +132,10 @@ fun UserInput(
     Surface(tonalElevation = 2.dp) {
         Column(modifier = modifier) {
             UserInputText(
+                onSend = {
+                    onMessageSent(textState.text);
+                    textState = TextFieldValue();
+                },
                 textFieldValue = textState,
                 onTextChanged = { textState = it },
                 // Only show the keyboard if there's no input selector and text field has focus
@@ -350,6 +354,7 @@ var SemanticsPropertyReceiver.keyboardShownProperty by KeyboardShownKey
 @ExperimentalFoundationApi
 @Composable
 private fun UserInputText(
+    onSend: () -> Unit,
     keyboardType: KeyboardType = KeyboardType.Text,
     onTextChanged: (TextFieldValue) -> Unit,
     textFieldValue: TextFieldValue,
@@ -399,7 +404,12 @@ private fun UserInputText(
                     textStyle = LocalTextStyle.current.copy(color = LocalContentColor.current)
                 )
 
-                IconButton(onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.CenterEnd).padding(end = 16.dp)) {
+                IconButton(
+                    onClick = onSend,
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .padding(end = 16.dp)
+                ) {
                     Icon(Icons.Filled.Send, contentDescription = "Send Message")
                 }
 

@@ -19,9 +19,10 @@ package com.github.luleyleo.emotivate
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.remember
 import androidx.core.view.WindowCompat
 import com.github.luleyleo.emotivate.conversation.ConversationContent
-import com.github.luleyleo.emotivate.data.exampleUiState
+import com.github.luleyleo.emotivate.conversation.ConversationUiState
 import com.github.luleyleo.emotivate.theme.JetchatTheme
 
 /**
@@ -37,8 +38,16 @@ class NavActivity : AppCompatActivity() {
 
         setContent {
             JetchatTheme {
+                val uiState = remember {
+                    ConversationUiState(
+                        initialMessages = listOf(),
+                        channelName = "#composers",
+                        channelMembers = 42
+                    )
+                }
+
                 ConversationContent(
-                    uiState = exampleUiState,
+                    uiState = uiState,
                     navigateToProfile = {},
                     onNavIconPressed = {}
                 )
