@@ -53,6 +53,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
@@ -68,6 +70,9 @@ import com.github.luleyleo.emotivate.FunctionalityNotAvailablePopup
 import com.github.luleyleo.emotivate.R
 import com.github.luleyleo.emotivate.components.JetchatAppBar
 import com.github.luleyleo.emotivate.data.exampleUiState
+import com.github.luleyleo.emotivate.state.ConversationUiState
+import com.github.luleyleo.emotivate.state.ConversationViewModel
+import com.github.luleyleo.emotivate.state.Message
 import com.github.luleyleo.emotivate.theme.JetchatTheme
 import kotlinx.coroutines.launch
 
@@ -82,7 +87,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConversationContent(
-    uiState: ConversationUiState,
+    model: ConversationViewModel,
     navigateToProfile: (String) -> Unit,
     modifier: Modifier = Modifier,
     onNavIconPressed: () -> Unit = { }
@@ -98,8 +103,8 @@ fun ConversationContent(
     Scaffold(
         topBar = {
             ChannelNameBar(
-                channelName = uiState.channelName,
-                channelMembers = uiState.channelMembers,
+                channelName = "",
+                channelMembers = 0,
                 onNavIconPressed = onNavIconPressed,
                 scrollBehavior = scrollBehavior,
             )
@@ -113,16 +118,14 @@ fun ConversationContent(
     ) { paddingValues ->
         Column(Modifier.fillMaxSize().padding(paddingValues)) {
             Messages(
-                messages = uiState.messages,
+                messages = model.uiState.messages,
                 navigateToProfile = navigateToProfile,
                 modifier = Modifier.weight(1f),
                 scrollState = scrollState
             )
             UserInput(
                 onMessageSent = { content ->
-                    uiState.addMessage(
-                        Message(authorMe, content, timeNow)
-                    )
+                    model.sendMessage(content)
                 },
                 resetScroll = {
                     scope.launch {
@@ -271,6 +274,8 @@ fun Message(
     val spaceBetweenAuthors = if (isLastMessageByAuthor) Modifier.padding(top = 8.dp) else Modifier
     Row(modifier = spaceBetweenAuthors) {
         if (isLastMessageByAuthor) {
+            val authorImage = if (msg.author == "me") R.drawable.ali else R.drawable.someone_else
+
             // Avatar
             Image(
                 modifier = Modifier
@@ -281,7 +286,7 @@ fun Message(
                     .border(3.dp, MaterialTheme.colorScheme.surface, CircleShape)
                     .clip(CircleShape)
                     .align(Alignment.Top),
-                painter = painterResource(id = msg.authorImage),
+                painter = painterResource(id = authorImage),
                 contentScale = ContentScale.Crop,
                 contentDescription = null,
             )
@@ -409,7 +414,7 @@ fun ChatItemBubble(
                 shape = ChatBubbleShape
             ) {
                 Image(
-                    painter = painterResource(it),
+                    painter = BitmapPainter(it.asImageBitmap()),
                     contentScale = ContentScale.Fit,
                     modifier = Modifier.size(160.dp),
                     contentDescription = stringResource(id = R.string.attached_image)
@@ -428,7 +433,7 @@ fun ClickableMessage(
     val uriHandler = LocalUriHandler.current
 
     val styledMessage = messageFormatter(
-        text = message.content,
+        text = message.text,
         primary = isUserMe
     )
 
@@ -456,7 +461,7 @@ fun ClickableMessage(
 fun ConversationPreview() {
     JetchatTheme {
         ConversationContent(
-            uiState = exampleUiState,
+            model = ConversationViewModel(exampleUiState),
             navigateToProfile = { }
         )
     }

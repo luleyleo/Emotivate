@@ -17,8 +17,8 @@
 package com.github.luleyleo.emotivate.data
 
 import com.github.luleyleo.emotivate.R
-import com.github.luleyleo.emotivate.conversation.ConversationUiState
-import com.github.luleyleo.emotivate.conversation.Message
+import com.github.luleyleo.emotivate.state.ConversationUiState
+import com.github.luleyleo.emotivate.state.Message
 
 private val initialMessages = listOf(
     Message(
@@ -30,7 +30,6 @@ private val initialMessages = listOf(
         "me",
         "Thank you!",
         "8:06 PM",
-        R.drawable.sticker
     ),
     Message(
         "Taylor Brooks",
@@ -61,6 +60,4 @@ private val initialMessages = listOf(
 
 val exampleUiState = ConversationUiState(
     initialMessages = initialMessages,
-    channelName = "#composers",
-    channelMembers = 42
 )
