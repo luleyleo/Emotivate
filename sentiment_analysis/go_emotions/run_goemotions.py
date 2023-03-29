@@ -17,13 +17,13 @@ from transformers import (
     get_linear_schedule_with_warmup
 )
 
-from model import BertForMultiLabelClassification
-from utils import (
+from go_emotions.model import BertForMultiLabelClassification
+from go_emotions.utils import (
     init_logger,
     set_seed,
     compute_metrics
 )
-from data_loader import (
+from go_emotions.data_loader import (
     load_and_cache_examples,
     GoEmotionsProcessor
 )
@@ -341,8 +341,32 @@ def main3():
     pprint(goemotions(texts))
     print()
 
+def get_prediction_from_inputs(input:[str]):
+    from transformers import BertTokenizer, AutoModelForSequenceClassification, pipeline
+    import pathlib
+
+
+    model_name = 'group'
+
+    tokenizer_name=f"monologg/bert-base-cased-goemotions-{model_name}"
+    model_name=f"monologg/bert-base-cased-goemotions-{model_name}"
+
+    tokenizer = BertTokenizer.from_pretrained(tokenizer_name)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+    goemotions = pipeline(
+        model=model,
+        tokenizer=tokenizer,
+        task="text-classification",
+        return_all_scores=True,
+        function_to_apply='sigmoid',
+    )
+    return goemotions(input)
+
+
 
 if __name__ == '__main__':
+    from pprint import pprint
     cli_parser = argparse.ArgumentParser()
 
     cli_parser.add_argument("--taxonomy", default='group', type=str, required=False, help="Taxonomy (original, ekman, group)")
@@ -350,4 +374,13 @@ if __name__ == '__main__':
     cli_args = cli_parser.parse_args()
 
     #main(cli_args)
-    main3()
+    texts = [
+        "Hey that's a thought! Maybe we need [NAME] to be the celebrity vaccine endorsement!",
+        "it’s happened before?! love my hometown of beautiful new ken 😂😂",
+        "I love you, brother.",
+        "Troll, bro. They know they're saying stupid shit. The motherfucker does nothing but stink up libertarian subs talking shit",
+    ]
+
+    output=get_prediction_from_inputs(texts)
+    pprint(output)
+    print()
