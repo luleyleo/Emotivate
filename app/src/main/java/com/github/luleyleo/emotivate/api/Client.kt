@@ -24,6 +24,14 @@ class Client {
         neuralService = retrofit.create(NeuralService::class.java)
     }
 
+    suspend fun getTranscript(audio: File): String {
+        val response = neuralService.getTranscript(
+            MultipartBody.Part.createFormData("audio", "audio.wav", RequestBody.create(mediaAudio, audio))
+        )
+
+        return response.string()
+    }
+
     suspend fun getAffectArousalDiagram(message: String, audio: File): Bitmap {
         val response = neuralService.getAffectArousalDiagram(
             RequestBody.create(mediaString, message),

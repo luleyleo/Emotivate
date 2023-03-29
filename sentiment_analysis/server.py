@@ -31,7 +31,7 @@ def transcribe():
     request.files['audio'].save(USER_AUDIO)
 
     audio_file = USER_AUDIO.open('rb')
-    transcript = openai.Audio.transcribe('whisper-1', audio_file)
+    transcript = openai.Audio.transcribe('whisper-1', audio_file)["text"]
 
     audio_file.close()
 

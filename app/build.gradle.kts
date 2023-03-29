@@ -25,8 +25,8 @@ android {
 
     defaultConfig {
         applicationId = "com.github.luleyleo.emotivate"
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
+        minSdk = 26
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

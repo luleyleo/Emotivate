@@ -16,7 +16,12 @@
 
 package com.github.luleyleo.emotivate.conversation
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.util.Log
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.MutableTransitionState
@@ -47,6 +52,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.outlined.AlternateEmail
 import androidx.compose.material.icons.outlined.Duo
@@ -71,6 +77,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.SemanticsPropertyKey
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
@@ -84,8 +92,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.github.luleyleo.emotivate.FunctionalityNotAvailablePopup
 import com.github.luleyleo.emotivate.R
+import com.github.luleyleo.emotivate.state.ConversationViewModel
+import java.io.File
 
 enum class InputSelector {
     NONE,
@@ -105,6 +116,77 @@ enum class EmojiStickerSelector {
 @Composable
 fun UserInputPreview() {
     UserInput(onMessageSent = {})
+}
+
+@Preview
+@Composable
+fun UserAudioInputPreview() {
+    UserAudioInput(model = ConversationViewModel(),onMessageSent = {})
+}
+
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@Composable
+fun UserAudioInput(model: ConversationViewModel, onMessageSent: (File) -> Unit) {
+    Row(horizontalArrangement = Arrangement.Center, modifier = Modifier
+        .fillMaxWidth()
+        .padding(4.dp)) {
+        val context = LocalContext.current
+
+        val launcher = rememberLauncherForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                // Permission Accepted: Do something
+                Log.d("ConversationScreen","PERMISSION GRANTED")
+
+            } else {
+                // Permission Denied: Do something
+                Log.d("ConversationScreen","PERMISSION DENIED")
+            }
+        }
+
+        val buttonClicked: () -> Unit = {
+            when (PackageManager.PERMISSION_GRANTED) {
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.RECORD_AUDIO
+                ) -> {
+                    if (model.isRecording) {
+                        Log.d("ConversationScreen", "Starting Recording")
+
+                        val recording = model.stopRecording()
+
+                        if (recording != null) {
+                            model.sendMessage("", recording);
+                        }
+                    } else {
+                        Log.d("ConversationScreen", "Starting Recording")
+
+                        val tempFile = File.createTempFile("recording.mpeg", null, context.cacheDir)
+                        model.startRecording(tempFile)
+                    }
+                }
+                else -> {
+                    launcher.launch(Manifest.permission.RECORD_AUDIO)
+                }
+            }
+        }
+
+        val buttonColor = if (model.isRecording) {
+            colorResource(id = R.color.red500)
+        } else {
+            colorResource(id = R.color.green500)
+        }
+
+        FloatingActionButton(
+            modifier = Modifier.padding(4.dp),
+            containerColor = buttonColor,
+            contentColor = Color.White,
+            onClick = buttonClicked,
+        ) {
+            Icon(Icons.Filled.Mic, "record voice message")
+        }
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)

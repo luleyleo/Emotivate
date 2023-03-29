@@ -137,8 +137,16 @@ fun ConversationContent(
             val resources = LocalContext.current.resources
             val cacheDir = LocalContext.current.cacheDir
 
-            UserInput(
-                onMessageSent = { content ->
+            UserAudioInput(
+                model = model,
+                onMessageSent = { audio ->
+                    model.sendMessage("", audio)
+                }
+            )
+
+            if (false) {
+                UserInput(
+                    onMessageSent = { content ->
                         val sampleTranscript = resources.getString(R.string.sample_audio_transcript)
                         val sampleAudio = resources.openRawResource(R.raw.sample_audio)
 
@@ -161,18 +169,19 @@ fun ConversationContent(
                         copyStreamToFile(sampleAudio, cacheFile)
 
                         model.sendMessage(sampleTranscript, cacheFile)
-                },
-                resetScroll = {
-                    scope.launch {
-                        scrollState.scrollToItem(0)
-                    }
-                },
-                // let this element handle the padding so that the elevation is shown behind the
-                // navigation bar
-                modifier = Modifier
-                    .navigationBarsPadding()
-                    .imePadding()
-            )
+                    },
+                    resetScroll = {
+                        scope.launch {
+                            scrollState.scrollToItem(0)
+                        }
+                    },
+                    // let this element handle the padding so that the elevation is shown behind the
+                    // navigation bar
+                    modifier = Modifier
+                        .navigationBarsPadding()
+                        .imePadding()
+                )
+            }
         }
     }
 }

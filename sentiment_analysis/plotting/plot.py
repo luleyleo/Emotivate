@@ -1,4 +1,5 @@
 
+from typing import List
 import seaborn as sns
 import matplotlib
 matplotlib.use('Agg')
@@ -18,7 +19,7 @@ POINT_EDGE_COLOR='red'
 
 RING_TRANSPARENCY = 0.33
 
-def plt_va(valence:[float], arousal:[float], img_path:str):
+def plt_va(valence: List[float], arousal: List[float], img_path:str):
     '''
     save plot of datapoints consisting of valence (x-axis) and arousal (y-axis)
     :param valence: list of valence values
@@ -28,6 +29,7 @@ def plt_va(valence:[float], arousal:[float], img_path:str):
     '''
     global POINT_TRANSPARENCY,RING_TRANSPARENCY,POINT_INNER_COLOR,POINT_EDGE_COLOR
 
+    plt.clf()
     target_label = 'valence\narousal: {1}'.format(valence, arousal)
     ax = sns.scatterplot(
         x=valence,
