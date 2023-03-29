@@ -5,9 +5,11 @@ import android.graphics.BitmapFactory
 import okhttp3.FormBody
 import okhttp3.MediaType
 import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import retrofit2.Retrofit
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 class Client {
     private val retrofit: Retrofit
@@ -17,7 +19,13 @@ class Client {
     private val mediaAudio = MediaType.parse("audio/wav")
 
     init {
+        val httpClient = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .build()
+
         retrofit = Retrofit.Builder()
+            .client(httpClient)
             .baseUrl("https://eba8-137-250-27-8.eu.ngrok.io")
             .build()
 

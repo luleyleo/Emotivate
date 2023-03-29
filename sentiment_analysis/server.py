@@ -19,6 +19,15 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 app=Flask(__name__)
+valence_map = {
+    'positive': 1,
+    'negative': -1,
+}
+arousal_map = {
+    'high': 1,
+    'mid': 0,
+    'low': -1,
+}
 
 
 @app.route('/api/test', methods=['GET'])
@@ -43,24 +52,24 @@ def valence_and_arousal():
     #expected input: wav/str
     #expected output: png/jpeg
 
-    valence=0.5
-    arousal=0.5
+    valence = 0.5
+    arousal = 0.5
 
     request.files['audio'].save(USER_AUDIO)
-    user_turn=request.form.get('transcript')
+    user_turn = request.form.get('transcript')
 
     print('analyzing text:', user_turn)
 
     # valence processing
-    v_analysis_out=module_sentiment.API(user_turn)
+    v_analysis_out = module_sentiment.API(user_turn)
     print('valence analysis: ' + str(v_analysis_out))
 
     # arousal processing
-    a_analysis_out=module_arousal.API(USER_AUDIO)
+    a_analysis_out = module_arousal.API(USER_AUDIO)
     print('arousal analysis: ' + str(a_analysis_out))
 
-    valence=float(v_analysis_out[1])
-    arousal=float(a_analysis_out[1])
+    valence = valence_map[v_analysis_out[0]] * float(v_analysis_out[1])
+    arousal = arousal_map[a_analysis_out[0]] * float(a_analysis_out[1])
 
     plot.plt_va([valence], [arousal], str(PLOT_PATH))
 
