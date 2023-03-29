@@ -1,0 +1,18 @@
+name: FIPsustAGE
+dependencies:
+  - python=3.7.9
+  - tqdm==4.54.1
+  - flask==1.1.1
+  - flask-restful==0.3.8
+  - conda-forge::librosa==0.8.0
+  - matplotlib==3.2.2
+  - pillow==8.3.1
+  - pip==20.2.4
+  - pytorch::pytorch==1.7.0
+  - requests==2.24.0
+  - pytorch::torchaudio==0.7.0
+  - pytorch::torchtext==0.8.0
+  - pytorch::torchvision==0.8.0
+  - conda-forge::openai==0.11.4
+  - conda-forge::attrdict==2.0.1
+  - transformers==4.24.0
