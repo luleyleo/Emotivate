@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b8cabf-226d-4a3e-8d10-68b9da3a3018" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/plots/v_a_plot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plotting/plot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/preprocessing_sound_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/valence_recognition/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/emo_db/03a05Wb.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module_arousal.py" beforeDir="false" afterPath="$PROJECT_DIR$/module_arousal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module_sentiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/module_sentiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_readme.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_readme.py" afterDir="false" />
-    </list>
+    <list default="true" id="d5b8cabf-226d-4a3e-8d10-68b9da3a3018" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,14 +28,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/B43rtigerB3rt/Desktop/Uni/Emotivate/sentiment_analysis/data/emo_db&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/B43rtigerB3rt/Desktop/Uni/Emotivate/sentiment_analysis",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <console-settings module-name="sentiment_analysis" is-module-sdk="true">
@@ -57,14 +46,103 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis\data\emo_db" />
       <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis" />
+      <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis\data\datasets" />
+      <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis\arousal_recognition" />
+      <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis\valence_recognition" />
+      <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis\plotting" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis\go_emotions\monologg" />
+      <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis" />
       <recent name="C:\Users\B43rtigerB3rt\Desktop\Uni\Emotivate\sentiment_analysis\valence_recognition" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.run_goemotions">
+    <configuration name="flask_client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="sentiment_analysis" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testing/flask_client.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="module_sentiment_mod" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="sentiment_analysis" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/module_sentiment_mod.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="run_goemotions" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="sentiment_analysis" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/go_emotions" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/go_emotions/run_goemotions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="sentiment_analysis" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test_readme" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sentiment_analysis" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -88,7 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.run_goemotions" />
+        <item itemvalue="Python.module_sentiment_mod" />
         <item itemvalue="Python.test_readme" />
+        <item itemvalue="Python.server" />
+        <item itemvalue="Python.flask_client" />
       </list>
     </recent_temporary>
   </component>
@@ -107,9 +189,39 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/testing/flask_client.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/test_readme.py</url>
-          <line>14</line>
-          <option name="timeStamp" value="6" />
+          <line>9</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/module_sentiment.py</url>
+          <line>22</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/module_sentiment_mod.py</url>
+          <line>45</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/go_emotions/run_goemotions.py</url>
+          <line>299</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/miniconda3/envs/FIPsustAGE/Lib/site-packages/transformers/tokenization_utils_base.py</url>
+          <line>1762</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/miniconda3/envs/FIPsustAGE/Lib/site-packages/transformers/utils/hub.py</url>
+          <line>367</line>
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
