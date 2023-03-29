@@ -310,16 +310,20 @@ def main2():
         "Troll, bro. They know they're saying stupid shit. The motherfucker does nothing but stink up libertarian subs talking shit",
     ]
 
-    pprint(goemotions(texts))
+    #pprint(goemotions(texts))
 
 def main3():
     from transformers import BertTokenizer, AutoModelForSequenceClassification, pipeline
+    import pathlib
+    from pprint import pprint
 
     model_name = 'group'
 
-    tokenizer = BertTokenizer.from_pretrained(f"go_emotions/monologg/bert-base-cased-goemotions-{model_name}")
-    model = AutoModelForSequenceClassification.from_pretrained(f"go_emotions/monologg/bert-base-cased-goemotions-{model_name}",
-                                                               num_labels=28)
+    tokenizer_name=f"monologg/bert-base-cased-goemotions-{model_name}"
+    model_name=f"monologg/bert-base-cased-goemotions-{model_name}"
+
+    tokenizer = BertTokenizer.from_pretrained(tokenizer_name)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name)
     texts = [
         "Hey that's a thought! Maybe we need [NAME] to be the celebrity vaccine endorsement!",
         "it’s happened before?! love my hometown of beautiful new ken 😂😂",
@@ -334,7 +338,8 @@ def main3():
         function_to_apply='sigmoid',
     )
 
-    goemotions(texts)
+    pprint(goemotions(texts))
+    print()
 
 
 if __name__ == '__main__':
