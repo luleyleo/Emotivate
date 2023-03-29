@@ -18,7 +18,7 @@ class Client {
 
     init {
         retrofit = Retrofit.Builder()
-            .baseUrl("https://8313-137-250-27-12.eu.ngrok.io")
+            .baseUrl("https://eba8-137-250-27-8.eu.ngrok.io")
             .build()
 
         neuralService = retrofit.create(NeuralService::class.java)

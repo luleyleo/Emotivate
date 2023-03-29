@@ -4,10 +4,23 @@ import json
 
 IP='127.0.0.1'
 PORT='5000'
-AUDIO_TEST=Path('..','data', 'datasets','emo_db', 'wav', '03a05Wb.wav').resolve()
+AUDIO_TEST=Path('../../app/src/main/res/raw/sample_audio.wav').resolve()
 
 
 def send_audio():
+
+    url = 'http://' + str(IP) + ':' + PORT + '/api/transcribe'
+
+    with open(str(AUDIO_TEST), 'rb') as file:
+        files = {'audio': file}
+
+        req = requests.post(url, files=files)
+
+        print(req.status_code)
+        print(req.text)
+
+
+def send_audio_and_transcript():
 
     url = 'http://' + str(IP) + ':' + PORT + '/api/audio'
 
