@@ -1,6 +1,5 @@
-import os 
+import os
 import sys
-import pdb
 sys.path.append('src')
 
 import json
@@ -39,9 +38,9 @@ def infer_arousal(X, modelPath):
 
 		confidence = confidence.item()
 
-		if pred.item() == 0: label = 'low'	
-		elif pred.item() == 1: label = 'mid'	
-		elif pred.item() == 2: label = 'high'	
+		if pred.item() == 0: label = 'low'
+		elif pred.item() == 1: label = 'mid'
+		elif pred.item() == 2: label = 'high'
 
 	else:
 
@@ -57,9 +56,9 @@ def infer_arousal(X, modelPath):
 		elif mostVotedClass == 1:	confidence = mean(pred_1_df['Confidence'])
 		elif mostVotedClass == 2:	confidence = mean(pred_2_df['Confidence'])
 
-		if mostVotedClass == 0: label = 'low'	
-		elif mostVotedClass == 1: label = 'mid'	
-		elif mostVotedClass == 2: label = 'high'	
+		if mostVotedClass == 0: label = 'low'
+		elif mostVotedClass == 1: label = 'mid'
+		elif mostVotedClass == 2: label = 'high'
 
 	confidence = '{:.3f}'.format(confidence)
 

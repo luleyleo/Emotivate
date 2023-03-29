@@ -1,6 +1,5 @@
 import os
 import sys
-import pdb
 sys.path.append('src')
 
 import random
@@ -30,8 +29,8 @@ def infer_sentiment(model, embeddings):
 	pred = torch.argmax(y_hat, dim=2)
 
 	if pred.item() == 0: label = 'negative'
-	
-	elif pred.item() == 1: label = 'positive'	
+
+	elif pred.item() == 1: label = 'positive'
 
 	return label, confidence
 
@@ -51,7 +50,7 @@ def API(sentence):
 		model = network_RNNandHA(config._embeddings_dim, config._sent_classes)
 		model.load_state_dict(load(os.path.join(storagePath, modelStoredPath)))
 
-		label, confidence = infer_sentiment(model, embeddings)	
+		label, confidence = infer_sentiment(model, embeddings)
 
 		confidence = '{:.3f}'.format(confidence)
 

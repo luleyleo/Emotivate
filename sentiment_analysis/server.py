@@ -6,7 +6,7 @@ from pathlib import Path
 import module_sentiment
 import module_arousal
 import os
-import requests
+import openai
 
 
 IP='127.0.0.1'
