@@ -18,7 +18,6 @@
 
 package com.github.luleyleo.emotivate.conversation
 
-import android.content.res.Resources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -68,7 +67,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
+import androidx.compose.ui.unit.em
 import com.github.luleyleo.emotivate.FunctionalityNotAvailablePopup
 import com.github.luleyleo.emotivate.R
 import com.github.luleyleo.emotivate.components.JetchatAppBar
@@ -80,7 +79,6 @@ import com.github.luleyleo.emotivate.theme.JetchatTheme
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
-import java.io.FileWriter
 import java.io.InputStream
 
 /**
@@ -474,11 +472,7 @@ fun ChatItemBubble(
                 color = backgroundBubbleColor,
                 shape = ChatBubbleShape
             ) {
-                ClickableMessage(
-                    message = Message(message.author, message.timestamp, it.emote()),
-                    isUserMe = isUserMe,
-                    authorClicked = authorClicked
-                )
+                Text(it.emote(), fontSize = 20.em)
             }
         }
     }
