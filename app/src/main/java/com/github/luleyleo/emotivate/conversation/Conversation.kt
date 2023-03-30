@@ -467,6 +467,20 @@ fun ChatItemBubble(
                 )
             }
         }
+
+        message.emotion?.let {
+            Spacer(modifier = Modifier.height(4.dp))
+            Surface(
+                color = backgroundBubbleColor,
+                shape = ChatBubbleShape
+            ) {
+                ClickableMessage(
+                    message = Message(message.author, message.timestamp, it.emote()),
+                    isUserMe = isUserMe,
+                    authorClicked = authorClicked
+                )
+            }
+        }
     }
 }
 
