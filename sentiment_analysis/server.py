@@ -68,16 +68,16 @@ def valence_and_arousal():
     a_analysis_out = module_arousal.API(USER_AUDIO)
     print('arousal analysis: ' + str(a_analysis_out))
 
-    valence = valence_map[v_analysis_out[0]] * float(v_analysis_out[1])
-    arousal = arousal_map[a_analysis_out[0]] * float(a_analysis_out[1])
+    #valence = valence_map[v_analysis_out[0]] * float(v_analysis_out[1])
+    #arousal = arousal_map[a_analysis_out[0]] * float(a_analysis_out[1])
 
-    plot.plt_va([valence], [arousal], str(PLOT_PATH))
+    #plot.plt_va([valence], [arousal], str(PLOT_PATH))
 
     os.remove(USER_AUDIO)
 
     print('sending back plot of user emotion')
-    return send_file(PLOT_PATH, mimetype='image/png', as_attachment=True,
-                        download_name='%s.jpg' % PLOT_PATH.name)
+    return f'{v_analysis_out[0]},{a_analysis_out[0]}'
+    #return send_file(PLOT_PATH, mimetype='image/png', as_attachment=True, download_name='%s.jpg' % PLOT_PATH.name)
 
 
 if __name__=='__main__':

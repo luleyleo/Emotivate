@@ -20,7 +20,7 @@ class NavActivity : AppCompatActivity() {
 
         // Turn off the decor fitting system windows, which allows us to handle insets,
         // including IME animations
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+       //WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
             JetchatTheme {

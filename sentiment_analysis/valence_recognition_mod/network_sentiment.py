@@ -1,4 +1,4 @@
-from valence_recognition import config
+from valence_recognition_mod import config
 
 import torch
 import torch.nn as nn

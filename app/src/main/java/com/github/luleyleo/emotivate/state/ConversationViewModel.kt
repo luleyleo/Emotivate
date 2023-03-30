@@ -8,9 +8,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.luleyleo.emotivate.api.Client
+import com.github.luleyleo.emotivate.state.ActionSelector
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
+import com.github.luleyleo.emotivate.state.Emotion
 
 class ConversationViewModel(initialState: ConversationUiState = ConversationUiState()) : ViewModel() {
     var uiState = initialState
@@ -18,6 +20,8 @@ class ConversationViewModel(initialState: ConversationUiState = ConversationUiSt
 
     var isRecording by mutableStateOf(false)
         private set
+
+    private var actionSelector = ActionSelector()
 
     private var client = Client()
     private var recorder: MediaRecorder? = null
@@ -30,8 +34,14 @@ class ConversationViewModel(initialState: ConversationUiState = ConversationUiSt
             try {
                 val transcript = client.getTranscript(audio)
                 uiState.addMessage(Message("me", "now", transcript))
-                val diagram = client.getAffectArousalDiagram(transcript, audio)
-                uiState.addMessage(Message("bot", "now", "Your emotions:", diagram))
+                //val diagram = client.getAffectArousalDiagram(transcript, audio)
+                val emotion=client.getAffectArousal(transcript, audio)
+                uiState.addMessage(Message("bot", "now", "Your emotions:", emotion = emotion))
+
+                //TODO: get strings from server
+                val action=actionSelector.selectAction(emotion.valence, emotion.arousal)
+                uiState.addMessage(Message("bot", "now", action))
+
             } catch (e: Exception) {
                 uiState.addMessage(Message("bot", "now", "Error:\n" + e.message))
             }
