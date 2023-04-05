@@ -121,7 +121,10 @@ class GoEmotionsProcessor(object):
             line = line.strip()
             items = line.split("\t")
             text_a = items[0]
-            label = list(map(int, items[1].split(",")))
+            try:
+                label = list(map(int, items[1].split(",")))
+            except Exception:
+                continue
             if i % 5000 == 0:
                 logger.info(line)
             examples.append(InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
@@ -157,30 +160,32 @@ def load_and_cache_examples(args, tokenizer, mode):
             mode
         )
     )
-    if os.path.exists(cached_features_file):
-        logger.info("Loading features from cached file %s", cached_features_file)
-        features = torch.load(cached_features_file)
+
+    logger.info("Creating features from dataset file at %s", args.data_dir)
+    if mode == "train":
+        examples = processor.get_examples("train")
+    elif mode == "dev":
+        examples = processor.get_examples("dev")
+    elif mode == "test":
+        examples = processor.get_examples("test")
     else:
-        logger.info("Creating features from dataset file at %s", args.data_dir)
-        if mode == "train":
-            examples = processor.get_examples("train")
-        elif mode == "dev":
-            examples = processor.get_examples("dev")
-        elif mode == "test":
-            examples = processor.get_examples("test")
-        else:
-            raise ValueError("For mode, only train, dev, test is available")
-        features = convert_examples_to_features(
-            args, examples, tokenizer, max_length=args.max_seq_len
-        )
-        logger.info("Saving features into cached file %s", cached_features_file)
-        torch.save(features, cached_features_file)
+        raise ValueError("For mode, only train, dev, test is available")
+    texts=[]
+    for ex in examples:
+        texts.append(ex.text_a)
+    features = convert_examples_to_features(
+        args, examples, tokenizer, max_length=args.max_seq_len
+    )
+    logger.info("Saving features into cached file %s", cached_features_file)
+    #torch.save(features, cached_features_file)
 
     # Convert to Tensors and build dataset
     all_input_ids = torch.tensor([f.input_ids for f in features], dtype=torch.long)
     all_attention_mask = torch.tensor([f.attention_mask for f in features], dtype=torch.long)
     all_token_type_ids = torch.tensor([f.token_type_ids for f in features], dtype=torch.long)
     all_labels = torch.tensor([f.label for f in features], dtype=torch.float)
+    from go_emotions_mod.PseudoTensor import PseudoTensor
+    all_texts = PseudoTensor([f.label for f in features], texts)
 
-    dataset = TensorDataset(all_input_ids, all_attention_mask, all_token_type_ids, all_labels)
+    dataset = TensorDataset(all_input_ids, all_attention_mask, all_token_type_ids, all_labels, all_texts)
     return dataset

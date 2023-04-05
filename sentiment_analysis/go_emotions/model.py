@@ -1,6 +1,11 @@
 import torch.nn as nn
 from transformers import BertPreTrainedModel, BertModel
 
+from torchsummary import torchsummary
+
+
+
+
 
 class BertForMultiLabelClassification(BertPreTrainedModel):
     def __init__(self, config):
@@ -24,6 +29,7 @@ class BertForMultiLabelClassification(BertPreTrainedModel):
             inputs_embeds=None,
             labels=None,
     ):
+
         outputs = self.bert(
             input_ids,
             attention_mask=attention_mask,
@@ -32,6 +38,8 @@ class BertForMultiLabelClassification(BertPreTrainedModel):
             head_mask=head_mask,
             inputs_embeds=inputs_embeds,
         )
+
+        torchsummary.summary(outputs)
         pooled_output = outputs[1]
 
         pooled_output = self.dropout(pooled_output)

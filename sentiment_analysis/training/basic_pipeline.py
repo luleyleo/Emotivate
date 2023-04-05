@@ -57,18 +57,27 @@ def test_loop(dataloader, model, loss_fn):
 class NeuralNetwork(nn.Module):
     # required:
     # __init__, forward(self,x)
-    def __init__(self):
+    def __init__(self, input_size):
         super().__init__()
         self.flatten = nn.Flatten()
-        self.linear_relu_stack = nn.Sequential(     # == ordered container of modules
-            nn.Linear(28*28, 512),
+        self.input_size=input_size
+        # self.linear_relu_stack = nn.Sequential(     # == ordered container of modules
+        #     nn.Linear(28*28, 512),
+        #     nn.ReLU(),
+        #     nn.Linear(512, 512),
+        #     nn.ReLU(),
+        #     nn.Linear(512, 10),
+        # )
+        self.layer_fullyConnected = nn.Sequential(
+            nn.Linear(self.input_size, 512),
             nn.ReLU(),
-            nn.Linear(512, 512),
+            nn.Linear(512,256, bias=True).float(),
             nn.ReLU(),
-            nn.Linear(512, 10),
+            nn.Linear(32, 2, bias=True).float()
         )
 
-    def forward(self, x):
+
+    def forward(self, x, ):
         x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits

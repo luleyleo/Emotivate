@@ -3,6 +3,7 @@ from pathlib import Path
 from valence_recognition.module_NLPtools import tokenizeSentence
 from go_emotions.run_goemotions import get_prediction_from_inputs
 
+
 emo_dict={
 "positive": ["amusement", "excitement", "joy", "love", "desire", "optimism", "caring", "pride", "admiration", "gratitude", "relief", "approval"],
 "negative": ["fear", "nervousness", "remorse", "embarrassment", "disappointment", "sadness", "grief", "disgust", "anger", "annoyance", "disapproval"],

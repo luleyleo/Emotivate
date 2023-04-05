@@ -8,7 +8,7 @@ import time
 
 import torch
 from torch import load
-
+import torchsummary
 from valence_recognition_mod.module_NLPtools import tokenizeSentence, extractEmbeddings
 from valence_recognition_mod.network_sentiment import network_RNNandHA
 
@@ -24,16 +24,20 @@ storagePath = Path('valence_recognition_mod','Models_Sentiment')
 # load network, initialize and remove last sequential layer
 model = network_RNNandHA(config._embeddings_dim, config._sent_classes)
 model.load_state_dict(load(os.path.join(storagePath, modelStoredPath)))
-model.layer_fullyConnected=torch.nn.Sequential(*(list(deepcopy(model.layer_fullyConnected).children())[:-1]))
+
+torchsummary.summary(model)
+model.layer_fullyConnected=torch.nn.Sequential(*(list(deepcopy(model.layer_fullyConnected).children())[:-2]))
 model.eval()
 
-# for layer in model.layer_fullyConnected.modules():
-#    b=layer
+print()
+torchsummary.summary(model)
+for layer in model.layer_fullyConnected.modules():
+   b=layer
 
 with open(os.path.join(storagePath, 'MOSEI_GloVe_300d' + '.json')) as f:
 	embeddingsDict = json.load(f)
 
-
+from torchsummary import summary
 def API(sentence):
 	global model
 
@@ -42,6 +46,7 @@ def API(sentence):
 	if len(tokens) >= 3:
 		embeddings = extractEmbeddings(tokens, info = False)
 		with torch.no_grad():
+			summary(model)
 			net_out=model(embeddings)
 			return net_out
 

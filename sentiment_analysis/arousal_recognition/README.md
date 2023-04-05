@@ -7,7 +7,7 @@ This repository provides an off-the-shelf arousal recognition API, which can be 
 ### Linux
 If you have conda installed (either miniconda or anaconda), you can execute
 ```bash
-conda env create -f .env-ymls/FIPsustAGE.yml
+conda env create -f .env-ymls/environment.yml
 ```
 to setup the virtual environment required to execute the API. You can activate the `FIPsustAGE` environment with 
 ```bash

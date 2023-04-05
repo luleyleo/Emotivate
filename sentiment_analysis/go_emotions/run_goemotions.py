@@ -340,7 +340,7 @@ def main3():
 
     pprint(goemotions(texts))
     print()
-
+from torchsummary import summary
 def get_prediction_from_inputs(input:[str]):
     from transformers import BertTokenizer, AutoModelForSequenceClassification, pipeline
     import pathlib
@@ -353,6 +353,8 @@ def get_prediction_from_inputs(input:[str]):
 
     tokenizer = BertTokenizer.from_pretrained(tokenizer_name)
     model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+    summary(model)
 
     goemotions = pipeline(
         model=model,
